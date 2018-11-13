@@ -1,0 +1,52 @@
+{
+  "definitions": {
+    "CatalogService": {
+      "kind": "service",
+      "@source": "srv\\my-service.cds"
+    },
+    "CatalogService.BookInfo": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "indexNo": 1,
+          "type": "cds.Integer",
+          "@cds.persistence.name": "ID"
+        },
+        "copiesSold": {
+          "indexNo": 2,
+          "type": "cds.Integer",
+          "@cds.persistence.name": "COPIESSOLD"
+        }
+      },
+      "@cds.persistence.name": "CATALOGSERVICE_BOOKINFO"
+    },
+    "my.bookshop.Books": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "indexNo": 1,
+          "type": "cds.Integer",
+          "@cds.persistence.name": "ID"
+        },
+        "title": {
+          "indexNo": 2,
+          "type": "cds.String",
+          "@cds.persistence.name": "TITLE"
+        },
+        "stock": {
+          "indexNo": 3,
+          "type": "cds.Integer",
+          "@cds.persistence.name": "STOCK"
+        }
+      },
+      "@cds.persistence.name": "MY_BOOKSHOP_BOOKS"
+    }
+  },
+  "version": {
+    "creator": "CDS Compiler v1.1.3",
+    "csn": "0.1.0"
+  },
+  "@sql_mapping": "plain"
+}
