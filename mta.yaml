@@ -21,12 +21,37 @@ modules:
         properties:
           url: '${default-url}'
     requires:
-      - name: bookshop-uaa
+      - name: uaa_bookshop
       - name: bookshop-hdi-container
         properties:
           JBP_CONFIG_RESOURCE_CONFIGURATION: >-
             [tomcat/webapps/ROOT/META-INF/context.xml:
             {"service_name_for_DefaultDB" : "~{hdi-container-name}"}]
+
+  
+
+
+  - name: test_app
+    type: html5
+    path: test_app
+    parameters:
+       disk-quota: 256M
+       memory: 256M
+    build-parameters:
+       builder: grunt
+    requires:
+     - name: srv_api
+       group: destinations
+       properties:
+          forwardAuthToken: true
+          strictSSL: false
+          name: srv_api
+          url: ~{url}
+     - name: uaa_bookshop
+
+
+  
+
 
   - name: app
     type: html5
@@ -51,25 +76,11 @@ resources:
     properties:
       hdi-container-name: '${service-name}'
     type: com.sap.xs.hdi-container
-  - name: bookshop-uaa
-    type: com.sap.xs.uaa
-    parameters:
-      service-plan: default
-      config:
-        xsappname: 'bookshop-${org}-${space}'
-        tenant-mode: dedicated
-        scopes:
-          - name: $XSAPPNAME.Show
-            description: display
-          - name: $XSAPPNAME.Add
-            description: create
-          - name: $XSAPPNAME.Remove
-            description: delete
 
   - name: uaa_bookshop
     parameters:
        path: ./xs-security.json
        service-plan: application
        service: xsuaa
-    type: org.cloudfoundry.managed-service
+    type: org.cloudfoundry.managed-servicey
 
