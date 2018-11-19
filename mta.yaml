@@ -31,23 +31,7 @@ modules:
   
 
 
-  - name: test_app
-    type: html5
-    path: test_app
-    parameters:
-       disk-quota: 256M
-       memory: 256M
-    build-parameters:
-       builder: grunt
-    requires:
-     - name: srv_api
-       group: destinations
-       properties:
-          forwardAuthToken: true
-          strictSSL: false
-          name: srv_api
-          url: ~{url}
-     - name: uaa_bookshop
+  
 
 
   
